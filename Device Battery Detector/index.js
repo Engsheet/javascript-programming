@@ -7,19 +7,24 @@ function initBattery() {
 
   console.log(navigator);
 
-  navigator.getBattery().then((battery) => {
+  navigator.getBattery().then((batt) => {
+    let battery = {
+      level: 1,
+      charging: false,
+    };
+
     updateBattery = () => {
       let level = Math.floor(battery.level * 100);
       batteryPercentage.innerHTML = level + "%";
       batteryLiquid.style.height = `${parseInt(battery.level * 100)}%`;
 
-      if (level == 100) {
-        batteryStatus.innerHTML = `Battery Full <i class="ri-battery-2-fill green-color"></i>`;
+      if (level == 100 && battery.charging) {
+        batteryStatus.innerHTML = '충전 완료 :> <i class="ri-battery-2-fill green-color"></i>';
         batteryLiquid.style.height = "103%";
       } else if (level <= 20 && !battery.charging) {
-        batteryStatus.innerHTML = 'Low  Charge <i class="ri-plug-line animated-red"></i>';
+        batteryStatus.innerHTML = '충전 필요 :< <i class="ri-plug-line animated-red"></i>';
       } else if (battery.charging) {
-        batteryStatus.innerHTML = '충전중 <i class="ri-flashlight-line animated-green"></i>';
+        batteryStatus.innerHTML = '충전중 ... <i class="ri-flashlight-line animated-green"></i>';
       } else {
         batteryStatus.innerHTML = "";
       }
