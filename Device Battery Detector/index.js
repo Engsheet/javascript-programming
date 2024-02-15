@@ -7,11 +7,11 @@ function initBattery() {
 
   console.log(navigator);
 
-  navigator.getBattery().then((batt) => {
-    let battery = {
-      level: 1,
-      charging: false,
-    };
+  navigator.getBattery().then((battery) => {
+    // let battery = {
+    //   level: 1,
+    //   charging: false,
+    // };
 
     updateBattery = () => {
       let level = Math.floor(battery.level * 100);
